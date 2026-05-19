@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NoMoreKonfius — Your Malaysian Spouse Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #D0021B;
+    --red-dark: #a80016;
+    --red-light: #ff1a35;
+    --white: #FFFFFF;
+    --black: #0A0A0A;
+    --grey: #f4f4f4;
+    --grey-mid: #e0e0e0;
+    --text-muted: #666;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 32px;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--grey-mid);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+  .nmk-badge {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--red);
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    font-family: 'DM Serif Display', serif;
+    font-size: 12px; font-weight: 400;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+  .nav-brand {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--black);
+  }
+  .nav-cta {
+    background: var(--red);
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--red-dark); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 100px 32px 60px;
+    position: relative;
+    overflow: hidden;
+    background: var(--black);
+  }
+  .hero-bg-text {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(80px, 18vw, 240px);
+    color: rgba(255,255,255,0.03);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -0.03em;
+  }
+  .hero-flag-accent {
+    position: absolute; top: 0; right: 0;
+    width: 4px; height: 100%;
+    background: var(--red);
+  }
+  .hero-content {
+    max-width: 760px;
+    position: relative; z-index: 2;
+    animation: fadeUp 0.8s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-tag {
+    display: inline-block;
+    background: var(--red);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 2px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 6vw, 68px);
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--red);
+  }
+  .hero-desc {
+    font-size: 18px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.65);
+    max-width: 540px;
+    margin-bottom: 40px;
+    font-weight: 300;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .hero-actions {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.4s ease both;
+  }
+  .btn-primary {
+    background: var(--red);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); }
+  .btn-secondary {
+    background: transparent;
+    color: rgba(255,255,255,0.8);
+    padding: 14px 28px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.5); color: white; }
+
+  .hero-stats {
+    display: flex; gap: 40px; flex-wrap: wrap;
+    margin-top: 60px; padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    animation: fadeUp 0.8s 0.5s ease both;
+  }
+  .stat-item { }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: white;
+    display: block;
+  }
+  .stat-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 2px;
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 80px 32px; }
+  .section-inner { max-width: 900px; margin: 0 auto; }
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .section-sub {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 560px;
+    margin-bottom: 48px;
+  }
+
+  /* ── PAIN SECTION ── */
+  .pain-section { background: var(--grey); }
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2px;
+    margin-top: 40px;
+  }
+  .pain-card {
+    background: white;
+    padding: 32px 28px;
+    position: relative;
+  }
+  .pain-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--red);
+    transition: height 0.3s;
+  }
+  .pain-card:hover::before { height: 100%; }
+  .pain-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .pain-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  .pain-card p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  /* ── OFFERS SECTION ── */
+  .offers-section { background: white; }
+
+  .offer-free-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #fff3f3;
+    border: 1px solid #ffd0d0;
+    color: var(--red);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 32px;
+    text-transform: uppercase;
+  }
+
+  .offers-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--grey-mid);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .offer-row {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    align-items: center;
+    gap: 24px;
+    padding: 28px 32px;
+    border-bottom: 1px solid var(--grey-mid);
+    background: white;
+    transition: background 0.2s;
+    text-decoration: none;
+    color: inherit;
+  }
+  .offer-row:last-child { border-bottom: none; }
+  .offer-row:hover { background: #fafafa; }
+
+  .offer-num {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--grey);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--black);
+    flex-shrink: 0;
+    transition: background 0.2s, color 0.2s;
+  }
+  .offer-row:hover .offer-num {
+    background: var(--red);
+    color: white;
+  }
+  .offer-row.highlight .offer-num {
+    background: var(--red);
+    color: white;
+  }
+  .offer-row.highlight {
+    background: #fff8f8;
+  }
+
+  .offer-info { min-width: 0; }
+  .offer-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+  .offer-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .offer-tags {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    background: var(--grey);
+    color: #555;
+  }
+  .tag.red { background: #fff0f0; color: var(--red); }
+
+  .offer-price-col {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .offer-price {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--black);
+    white-space: nowrap;
+  }
+  .offer-price-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+  .offer-btn {
+    display: inline-block;
+    margin-top: 10px;
+    background: var(--black);
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .offer-btn:hover { background: var(--red); }
+  .offer-btn.red-btn { background: var(--red); }
+  .offer-btn.red-btn:hover { background: var(--red-dark); }
+  .offer-btn.ghost {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--grey-mid);
+  }
+  .offer-btn.ghost:hover { background: var(--grey); color: var(--black); border-color: #ccc; }
+
+  /* ── TRUST SECTION ── */
+  .trust-section { background: var(--black); color: white; }
+  .trust-section .section-title { color: white; }
+  .trust-section .section-sub { color: rgba(255,255,255,0.5); }
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2px;
+    margin-top: 48px;
+  }
+  .trust-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 32px 24px;
+    border-radius: 4px;
+  }
+  .trust-card .icon {
+    font-size: 28px;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .trust-card h4 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: white;
+    margin-bottom: 8px;
+  }
+  .trust-card p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.65;
+  }
+
+  /* ── FAQ SECTION ── */
+  .faq-section { background: var(--grey); }
+  .faq-list { margin-top: 40px; }
+  .faq-item {
+    background: white;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    overflow: hidden;
+  }
+  .faq-q {
+    padding: 20px 24px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    user-select: none;
+    transition: color 0.2s;
+  }
+  .faq-q:hover { color: var(--red); }
+  .faq-q .arrow {
+    font-size: 18px;
+    transition: transform 0.25s;
+    color: var(--red);
+    flex-shrink: 0;
+    margin-left: 12px;
+  }
+  .faq-item.open .faq-q .arrow { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.25s;
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    padding: 0 24px;
+  }
+  .faq-item.open .faq-a {
+    max-height: 300px;
+    padding: 0 24px 20px;
+  }
+
+  /* ── CTA SECTION ── */
+  .cta-section {
+    background: var(--red);
+    color: white;
+    text-align: center;
+    padding: 80px 32px;
+  }
+  .cta-section .section-title { color: white; margin-bottom: 16px; }
+  .cta-section p {
+    font-size: 17px;
+    color: rgba(255,255,255,0.8);
+    max-width: 500px;
+    margin: 0 auto 36px;
+    line-height: 1.7;
+  }
+  .btn-white {
+    background: white;
+    color: var(--red);
+    padding: 14px 32px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-white:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    color: rgba(255,255,255,0.35);
+    padding: 32px;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+  footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+  footer a:hover { color: white; }
+  .footer-logo {
+    display: flex; align-items: center; gap: 10px;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .footer-logo span {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: white;
+  }
+
+  /* ── DISCLAIMER STRIP ── */
+  .disclaimer-strip {
+    background: #1a1a1a;
+    color: rgba(255,255,255,0.3);
+    padding: 12px 32px;
+    text-align: center;
+    font-size: 11px;
+    line-height: 1.6;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    nav { padding: 14px 20px; }
+    .hero { padding: 90px 20px 50px; }
+    section { padding: 60px 20px; }
+    .offer-row {
+      grid-template-columns: 44px 1fr;
+      grid-template-rows: auto auto;
+      gap: 12px 16px;
+    }
+    .offer-price-col {
+      grid-column: 2;
+      text-align: left;
+    }
+    .hero-stats { gap: 24px; }
+    footer { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nmk-badge">NMK</div>
+    <span class="nav-brand">NoMoreKonfius</span>
+  </a>
+  <a href="#offers" class="nav-cta">Lihat Panduan →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-text">konfius</div>
+  <div class="hero-flag-accent"></div>
+  <div class="hero-content">
+    <div class="hero-tag">🇲🇾 Your Malaysian Spouse Guide</div>
+    <h1>Kahwin Malaysian.<br><em>Tahu apa kau buat.</em></h1>
+    <p class="hero-desc">
+      Proses dokumen, imigresen, LTSVP, dan PR — explained step by step. No lawyer fees. No confusion. Buat betul dari awal.
+    </p>
+    <div class="hero-actions">
+      <a href="#offers" class="btn-primary">Lihat Semua Panduan</a>
+      <a href="https://wa.me/60169924396" class="btn-secondary">WhatsApp Kami</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">4–8</span>
+        <span class="stat-label">Bulan proses purata</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">RM1K+</span>
+        <span class="stat-label">Denda boleh dielak</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">BD + PK</span>
+        <span class="stat-label">Bangladesh & Pakistan focus</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN POINTS -->
+<section class="pain-section">
+  <div class="section-inner">
+    <div class="section-label">Masalah yang biasa</div>
+    <h2 class="section-title">Ramai yang silap<br>dari awal.</h2>
+    <p class="section-sub">Bukan sebab buat benda salah — tapi sebab tiada sesiapa yang explain step by step dalam bahasa yang faham.</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <span class="pain-icon">📄</span>
+        <h3>Dokumen salah atau tak lengkap</h3>
+        <p>Apostille tertinggal. Nama tak konsisten antara dokumen. Permohonan kena reject, ulang dari awal.</p>
+      </div>
+      <div class="pain-card">
+        <span class="pain-icon">⏱️</span>
+        <h3>Waste masa berminggu-minggu</h3>
+        <p>Research sendiri dari forum ke forum. Dapat info lama atau tak tepat. Tak tahu mana nak percaya.</p>
+      </div>
+      <div class="pain-card">
+        <span class="pain-icon">⚠️</span>
+        <h3>Kena denda atau masalah imigresen</h3>
+        <p>Kahwin tanpa kebenaran PAID — denda RM1,000 setiap orang. LTSVP expired tanpa tahu cara renew betul.</p>
+      </div>
+      <div class="pain-card">
+        <span class="pain-icon">💸</span>
+        <h3>Bayar agent mahal, tapi silap</h3>
+        <p>Dah spend RM2,000 kat agent yang pun bagi info tak tepat. Wang habis, masalah masih ada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFERS -->
+<section class="offers-section" id="offers">
+  <div class="section-inner">
+    <div class="section-label">Produk & Perkhidmatan</div>
+    <h2 class="section-title">Pilih tahap<br>bantuan yang kau perlukan.</h2>
+    <p class="section-sub">Dari checklist asas hingga pendampingan 30 hari — ada untuk semua peringkat proses.</p>
+
+    <div class="offer-free-pill">
+      ✓ Offer 1 & 2 — Auto delivery selepas bayar
+    </div>
+
+    <div class="offers-stack">
+
+      <!-- OFFER 1 -->
+      <div class="offer-row">
+        <div class="offer-num">1</div>
+        <div class="offer-info">
+          <div class="offer-name">Senarai Semak Dokumen</div>
+          <div class="offer-desc">Checklist lengkap semua dokumen yang kau perlukan — dari pra-perkahwinan hingga LTSVP. Khas untuk Bangladesh & Pakistan.</div>
+          <div class="offer-tags">
+            <span class="tag">PDF</span>
+            <span class="tag">Auto delivery</span>
+            <span class="tag red">Bangladesh</span>
+            <span class="tag red">Pakistan</span>
+          </div>
+        </div>
+        <div class="offer-price-col">
+          <div class="offer-price">RM18</div>
+          <div class="offer-price-sub">Bayar sekali</div>
+          <!-- REPLACE href with your ToyyibPay bill link -->
+          <a href="https://toyyibpay.com/NMK-Senarai-Semak-Dokumen" class="offer-btn" target="_blank">Beli Sekarang</a>
+        </div>
+      </div>
+
+      <!-- OFFER 2 -->
+      <div class="offer-row highlight">
+        <div class="offer-num">2</div>
+        <div class="offer-info">
+          <div class="offer-name">Panduan Lengkap Spouse</div>
+          <div class="offer-desc">Step-by-step guide A hingga Z — timeline realistik, apostille, PAID, perkahwinan, LTSVP renewal, hingga PR. 9 bab penuh insider info.</div>
+          <div class="offer-tags">
+            <span class="tag">PDF 9 Bab</span>
+            <span class="tag">Auto delivery</span>
+            <span class="tag red">Paling Popular</span>
+          </div>
+        </div>
+        <div class="offer-price-col">
+          <div class="offer-price">RM97</div>
+          <div class="offer-price-sub">Bayar sekali</div>
+          <!-- REPLACE href with your ToyyibPay bill link -->
+          <a href="https://toyyibpay.com/NMK-Panduan-Lengkap-Spouse" class="offer-btn red-btn" target="_blank">Beli Sekarang</a>
+        </div>
+      </div>
+
+      <!-- OFFER 3 -->
+      <div class="offer-row">
+        <div class="offer-num">3</div>
+        <div class="offer-info">
+          <div class="offer-name">Document Audit</div>
+          <div class="offer-desc">Hantar dokumen kau, kami semak dalam 48 jam. Dapat laporan: apa yang betul, apa yang perlu diperbetul sebelum submit.</div>
+          <div class="offer-tags">
+            <span class="tag">Async review</span>
+            <span class="tag">48 jam</span>
+            <span class="tag">WhatsApp</span>
+          </div>
+        </div>
+        <div class="offer-price-col">
+          <div class="offer-price">RM150–250</div>
+          <div class="offer-price-sub">Bergantung kes</div>
+          <!-- REPLACE with your WhatsApp link -->
+          <a href="https://wa.me/60169924396?text=Saya%20berminat%20Document%20Audit" class="offer-btn" target="_blank">WhatsApp Kami</a>
+        </div>
+      </div>
+
+      <!-- OFFER 4 -->
+      <div class="offer-row">
+        <div class="offer-num">4</div>
+        <div class="offer-info">
+          <div class="offer-name">Situation Assessment</div>
+          <div class="offer-desc">Kongsi situasi kau secara detail. Kami analisa dan bagi written roadmap yang spesifik untuk kes kau — bukan jawapan generic.</div>
+          <div class="offer-tags">
+            <span class="tag">Intake form</span>
+            <span class="tag">Written roadmap</span>
+            <span class="tag">WhatsApp</span>
+          </div>
+        </div>
+        <div class="offer-price-col">
+          <div class="offer-price">RM200–350</div>
+          <div class="offer-price-sub">Bergantung kes</div>
+          <a href="https://wa.me/60169924396?text=Saya%20berminat%20Situation%20Assessment" class="offer-btn" target="_blank">WhatsApp Kami</a>
+        </div>
+      </div>
+
+      <!-- OFFER 5 -->
+      <div class="offer-row">
+        <div class="offer-num">5</div>
+        <div class="offer-info">
+          <div class="offer-name">30-Day Companion</div>
+          <div class="offer-desc">Pendampingan penuh 30 hari via WhatsApp async. Tanya bila-bila masa, kami guide setiap langkah. Max 5 klien serentak.</div>
+          <div class="offer-tags">
+            <span class="tag">WhatsApp 30 hari</span>
+            <span class="tag red">Terhad — 5 slot</span>
+          </div>
+        </div>
+        <div class="offer-price-col">
+          <div class="offer-price">RM350–500</div>
+          <div class="offer-price-sub">30 hari penuh</div>
+          <a href="https://wa.me/60169924396?text=Saya%20berminat%2030-Day%20Companion" class="offer-btn" target="_blank">WhatsApp Kami</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust-section">
+  <div class="section-inner">
+    <div class="section-label" style="color: rgba(255,255,255,0.4);">Kenapa NoMoreKonfius</div>
+    <h2 class="section-title">Bukan teori.<br>Hands-on knowledge.</h2>
+    <p class="section-sub">Info yang ada dalam produk kami adalah dari pengalaman sebenar — bukan copy-paste dari website kerajaan.</p>
+    <div class="trust-grid">
+      <div class="trust-card">
+        <span class="icon">🎯</span>
+        <h4>Info yang tepat & terkini</h4>
+        <p>Termasuk peraturan baru 2026 untuk sijil kursus pra-perkahwinan. Kau tak akan jumpa ni dalam Google.</p>
+      </div>
+      <div class="trust-card">
+        <span class="icon">🇧🇩 🇵🇰</span>
+        <h4>Fokus Bangladesh & Pakistan</h4>
+        <p>Apostille, NADRA, nama mismatch, PCC — semua dijelaskan spesifik untuk dokumen negara kau.</p>
+      </div>
+      <div class="trust-card">
+        <span class="icon">⚡</span>
+        <h4>Jimat masa & wang</h4>
+        <p>Elak kesilapan mahal. Jimat 2–3 minggu research sendiri. Buat betul dari percubaan pertama.</p>
+      </div>
+      <div class="trust-card">
+        <span class="icon">🗣️</span>
+        <h4>Bahasa yang faham</h4>
+        <p>Malay, English, dan Bengali. Burokrasi diterjemah kepada langkah praktikal yang boleh terus buat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="section-inner">
+    <div class="section-label">Soalan Lazim</div>
+    <h2 class="section-title">Jawapan kepada<br>soalan biasa.</h2>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Apa beza Offer 1 dan Offer 2? <span class="arrow">+</span>
+        </div>
+        <div class="faq-a">Offer 1 adalah checklist ringkas — senarai dokumen yang kau perlukan untuk setiap peringkat. Offer 2 adalah panduan lengkap 9 bab dengan penjelasan mendalam setiap langkah, timeline, dan insider tips yang tidak ada di tempat lain.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Selepas bayar, macam mana dapat PDF? <span class="arrow">+</span>
+        </div>
+        <div class="faq-a">Selepas pembayaran berjaya melalui ToyyibPay, kau akan terus di-redirect ke link download PDF. Tiada tunggu, tiada email perlu. Automatic.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Saya dari Bangladesh — adakah panduan ini relevan untuk saya? <span class="arrow">+</span>
+        </div>
+        <div class="faq-a">Ya, sangat relevan. Kedua-dua Offer 1 dan Offer 2 ada bahagian khas untuk Bangladesh — termasuk apostille dari Ministry of Foreign Affairs, PCC, variasi nama 'Md' vs 'Mohammad', dan sijil bujang dari Union Parishad.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Ini perkhidmatan guaman atau peguam? <span class="arrow">+</span>
+        </div>
+        <div class="faq-a">Tidak. NoMoreKonfius bukan perkhidmatan guaman dan kami bukan peguam. Kami menyediakan panduan berdasarkan pengalaman hands-on dan pengetahuan praktikal. Untuk nasihat undang-undang formal, sila rujuk peguam bertauliah.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Boleh bayar guna apa? <span class="arrow">+</span>
+        </div>
+        <div class="faq-a">Kami guna ToyyibPay — support FPX (semua bank Malaysia), DuitNow, dan kad kredit/debit. Shariah compliant.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Situasi saya complicated — mana yang sesuai? <span class="arrow">+</span>
+        </div>
+        <div class="faq-a">Mulakan dengan Offer 2 untuk asas. Jika selepas baca kau rasa kes kau memerlukan pandangan spesifik, naikkan ke Offer 3 (Document Audit) atau Offer 4 (Situation Assessment). WhatsApp kami dulu jika tak pasti.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-section">
+  <div class="section-inner" style="text-align:center">
+    <div class="section-label" style="color:rgba(255,255,255,0.6)">Jangan tunggu lagi</div>
+    <h2 class="section-title">Mulakan dengan betul.<br>Jimat masa, elak silap.</h2>
+    <p>Ramai yang dah selesai proses mereka dengan panduan NoMoreKonfius. Kau pun boleh.</p>
+    <a href="#offers" class="btn-white">Lihat Semua Panduan ↑</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div class="nmk-badge">NMK</div>
+    <span>NoMoreKonfius</span>
+  </div>
+  <p>@spouseinmalaysia &nbsp;·&nbsp; TikTok &nbsp;·&nbsp; Instagram &nbsp;·&nbsp; YouTube &nbsp;·&nbsp; Facebook</p>
+  <p style="margin-top:8px">
+    <a href="https://wa.me/60169924396">WhatsApp</a>
+  </p>
+</footer>
+
+<div class="disclaimer-strip">
+  NoMoreKonfius menyediakan panduan berdasarkan pengalaman praktikal sahaja dan bukan nasihat guaman. Untuk isu undang-undang, sila rujuk peguam bertauliah. Semua maklumat adalah untuk tujuan panduan am sahaja.
+</div>
+
+<script>
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const isOpen = item.classList.contains('open');
+    // close all
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Smooth reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.pain-card, .trust-card, .offer-row').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
