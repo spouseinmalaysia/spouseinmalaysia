@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NoMoreKonfius — @spouseinmalaysia</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #D0021B;
+    --red-dark: #a80016;
+    --white: #FFFFFF;
+    --black: #0A0A0A;
+    --grey: #f4f4f4;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 48px 20px 60px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Background texture */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(208,2,27,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 30% at 80% 110%, rgba(208,2,27,0.08) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    z-index: 1;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── PROFILE ── */
+  .profile {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .nmk-avatar {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: var(--red);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: white;
+    letter-spacing: 0.04em;
+    box-shadow: 0 0 0 3px rgba(208,2,27,0.3), 0 0 0 6px rgba(208,2,27,0.1);
+  }
+
+  .profile-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    color: white;
+    margin-bottom: 4px;
+  }
+
+  .profile-handle {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 10px;
+    letter-spacing: 0.03em;
+  }
+
+  .profile-bio {
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.6;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .flag-row {
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    margin-top: 10px;
+    font-size: 20px;
+  }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    margin: 28px 0 10px;
+    padding-left: 4px;
+  }
+
+  /* ── LINK CARDS ── */
+  .link-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 14px 18px;
+    text-decoration: none;
+    color: white;
+    margin-bottom: 10px;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .link-card:hover {
+    background: rgba(255,255,255,0.09);
+    border-color: rgba(255,255,255,0.18);
+    transform: translateY(-1px);
+  }
+
+  .link-card.primary {
+    background: var(--red);
+    border-color: transparent;
+  }
+  .link-card.primary:hover {
+    background: var(--red-dark);
+    border-color: transparent;
+  }
+
+  .link-card.secondary {
+    background: rgba(208,2,27,0.12);
+    border-color: rgba(208,2,27,0.25);
+  }
+  .link-card.secondary:hover {
+    background: rgba(208,2,27,0.2);
+    border-color: rgba(208,2,27,0.4);
+  }
+
+  .link-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+    width: 28px;
+    text-align: center;
+  }
+
+  .link-text { flex: 1; min-width: 0; }
+
+  .link-title {
+    font-size: 15px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .link-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    display: block;
+  }
+  .link-card.primary .link-sub { color: rgba(255,255,255,0.7); }
+  .link-card.secondary .link-sub { color: rgba(255,120,130,0.8); }
+
+  .link-arrow {
+    font-size: 16px;
+    color: rgba(255,255,255,0.3);
+    flex-shrink: 0;
+  }
+
+  /* Price badge */
+  .price-badge {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 20px;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .link-card.primary .price-badge { background: rgba(255,255,255,0.25); }
+
+  /* ── SOCIAL ROW ── */
+  .social-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .social-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 11px 8px;
+    text-decoration: none;
+    color: rgba(255,255,255,0.7);
+    font-size: 12px;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+  }
+  .social-btn:hover {
+    background: rgba(255,255,255,0.1);
+    color: white;
+  }
+  .social-btn .s-icon { font-size: 16px; }
+
+  /* ── FOOTER ── */
+  .bio-footer {
+    text-align: center;
+    margin-top: 36px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.2);
+    line-height: 1.8;
+  }
+
+  /* Stagger animation */
+  .link-card:nth-child(1) { animation-delay: 0.05s; }
+  .link-card:nth-child(2) { animation-delay: 0.1s; }
+  .link-card:nth-child(3) { animation-delay: 0.15s; }
+  .link-card:nth-child(4) { animation-delay: 0.2s; }
+  .link-card:nth-child(5) { animation-delay: 0.25s; }
+  .link-card:nth-child(6) { animation-delay: 0.3s; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- PROFILE -->
+  <div class="profile">
+    <div class="nmk-avatar">NMK</div>
+    <div class="profile-name">NoMoreKonfius</div>
+    <div class="profile-handle">@spouseinmalaysia</div>
+    <div class="profile-bio">Foreign spouse navigating Malaysia?<br>Kahwin & visa process — simplified.</div>
+    <div class="flag-row">🇲🇾 🇧🇩 🇵🇰</div>
+  </div>
+
+  <!-- DIGITAL PRODUCTS -->
+  <div class="section-label">Panduan & Produk</div>
+
+  <!-- Offer 1 -->
+  <a href="https://toyyibpay.com/NMK-Senarai-Semak-Dokumen" class="link-card secondary" target="_blank">
+    <span class="link-icon">📋</span>
+    <span class="link-text">
+      <span class="link-title">Senarai Semak Dokumen</span>
+      <span class="link-sub">Checklist lengkap perkahwinan & LTSVP</span>
+    </span>
+    <span class="price-badge">RM18</span>
+    <span class="link-arrow">›</span>
+  </a>
+
+  <!-- Offer 2 -->
+  <a href="https://toyyibpay.com/NMK-Senarai-Semak-Dokumen" class="link-card primary" target="_blank">
+    <span class="link-icon">📖</span>
+    <span class="link-text">
+      <span class="link-title">Panduan Lengkap Spouse</span>
+      <span class="link-sub">9 bab — A hingga Z, LTSVP hingga PR</span>
+    </span>
+    <span class="price-badge">RM97</span>
+    <span class="link-arrow">›</span>
+  </a>
+
+  <!-- SERVICES -->
+  <div class="section-label">Perkhidmatan</div>
+
+  <!-- Offer 3 -->
+  <a href="https://wa.me/60169924396?text=Saya%20berminat%20Document%20Audit" class="link-card" target="_blank">
+    <span class="link-icon">🔍</span>
+    <span class="link-text">
+      <span class="link-title">Document Audit</span>
+      <span class="link-sub">Semak dokumen kau dalam 48 jam</span>
+    </span>
+    <span class="price-badge">RM150–250</span>
+    <span class="link-arrow">›</span>
+  </a>
+
+  <!-- Offer 4 -->
+  <a href="https://wa.me/60169924396?text=Saya%20berminat%20Situation%20Assessment" class="link-card" target="_blank">
+    <span class="link-icon">🗺️</span>
+    <span class="link-text">
+      <span class="link-title">Situation Assessment</span>
+      <span class="link-sub">Roadmap spesifik untuk kes kau</span>
+    </span>
+    <span class="price-badge">RM200–350</span>
+    <span class="link-arrow">›</span>
+  </a>
+
+  <!-- Offer 5 -->
+  <a href="https://wa.me/60169924396?text=Saya%20berminat%2030-Day%20Companion" class="link-card" target="_blank">
+    <span class="link-icon">💬</span>
+    <span class="link-text">
+      <span class="link-title">30-Day Companion</span>
+      <span class="link-sub">WhatsApp async 30 hari — 5 slot sahaja</span>
+    </span>
+    <span class="price-badge">RM350–500</span>
+    <span class="link-arrow">›</span>
+  </a>
+
+  <!-- WEBSITE -->
+  <div class="section-label">Lagi</div>
+
+  <a href="https://spouseinmalaysia.github.io/spouseinmalaysia" class="link-card" target="_blank">
+    <span class="link-icon">🌐</span>
+    <span class="link-text">
+      <span class="link-title">Website Penuh</span>
+      <span class="link-sub">FAQ, semua offer, & info lanjut</span>
+    </span>
+    <span class="link-arrow">›</span>
+  </a>
+
+  <!-- SOCIAL -->
+  <div class="section-label">Ikuti Kami</div>
+
+  <div class="social-row">
+    <a href="https://www.tiktok.com/@spouseinmalaysia" class="social-btn" target="_blank">
+      <span class="s-icon">🎵</span> TikTok
+    </a>
+    <a href="https://www.instagram.com/spouseinmalaysia" class="social-btn" target="_blank">
+      <span class="s-icon">📸</span> Instagram
+    </a>
+    <a href="https://www.youtube.com/@spouseinmalaysia" class="social-btn" target="_blank">
+      <span class="s-icon">▶️</span> YouTube
+    </a>
+    <a href="https://www.facebook.com/spouseinmalaysia" class="social-btn" target="_blank">
+      <span class="s-icon">👥</span> Facebook
+    </a>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="bio-footer">
+    NoMoreKonfius · @spouseinmalaysia<br>
+    Panduan sahaja — bukan nasihat guaman.
+  </div>
+
+</div>
+</body>
+</html>
